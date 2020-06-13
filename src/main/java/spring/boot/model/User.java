@@ -57,8 +57,15 @@ public class User {
 	  @Size(min = 4, max = 50) private String lastname;
 	 
 
-	   
+	  @Column(name = "Birthday", length = 50)
+	 private String birthday;
 
+	  @Column(name = "Adresse", length = 50)
+		 private String Adr;
+	  
+	  @Column(name = "Telephone", length = 8)
+		 private String tlf;
+	  
 
 	    @ManyToMany
 	    @JoinTable(
@@ -118,6 +125,23 @@ public class User {
 		return email;
 	}
 
+	/*
+	public User(@NotNull(message = "Username is required .") @Size(min = 4, max = 50) String username,
+			@Email @NotNull(message = "Email is required .") @Size(min = 4, max = 50) String email,
+			@NotNull(message = "Password is required .") @Size(min = 4, max = 100) String password,
+			@Size(min = 4, max = 50) String firstname, @Size(min = 4, max = 50) String lastname, String birthday,
+			String adr, String tlf) {
+		super();
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.birthday = birthday;
+		Adr = adr;
+		this.tlf = tlf;
+	}
+*/
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -137,4 +161,58 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.Roles = roles;
 	}
+
+	public String getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
+
+	public String getAdr() {
+		return Adr;
+	}
+
+	public void setAdr(String adr) {
+		Adr = adr;
+	}
+
+	public String getTlf() {
+		return tlf;
+	}
+
+	public void setTlf(String tlf) {
+		this.tlf = tlf;
+	}
+
+	public User(  String email,
+			 String password,
+			 String firstname, String lastname, String birthday,
+			String adr, String tlf) {
+
+		this.email = email;
+		this.password = password;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.birthday = birthday;
+		Adr = adr;
+		this.tlf = tlf;
+	}
+
+	public User(String email,
+			String firstname, 
+			String lastname, String birthday,
+			String adr, String tlf) {
+	
+		this.email = email;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.birthday = birthday;
+		Adr = adr;
+		this.tlf = tlf;
+	}
+	
+	
+	
 }

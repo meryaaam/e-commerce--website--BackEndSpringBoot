@@ -48,6 +48,7 @@ public class UserController {
 	@Autowired
 	PasswordEncoder encoder;
 
+	 @PreAuthorize("  hasRole('ADMIN')")
 	 @GetMapping("users")
 	  public ResponseEntity<List<User>> getAllUsers(@RequestParam(required = false) String Username) 
 	 {
@@ -70,6 +71,7 @@ public class UserController {
 	  }
 	
 	
+	 @PreAuthorize(" hasRole('MODERATOR') or hasRole('ADMIN') or hasRole('USER') ")
 	 @DeleteMapping("/users/{id}")
 	  public ResponseEntity<HttpStatus> deleteUsers(@PathVariable("id") long id) {
 	    try {
@@ -80,6 +82,7 @@ public class UserController {
 	    }
 	 }
 	    
+	 @PreAuthorize(" hasRole('MODERATOR') or hasRole('ADMIN') or hasRole('USER') ")
 	    @GetMapping("/users/{id}")
 		  public ResponseEntity<?> getUserById(@PathVariable("id") long id) {
 	    	
@@ -98,6 +101,7 @@ public class UserController {
 		    }
 		  }
 	    
+	 @PreAuthorize("  hasRole('ADMIN')")
 		 @DeleteMapping("/users")
 		  public ResponseEntity<HttpStatus> deleteAllUsers() {
 		    try {
@@ -112,18 +116,21 @@ public class UserController {
 
 		 
 		 
-	
+		 @PreAuthorize(" hasRole('MODERATOR') or hasRole('ADMIN') or hasRole('USER') ")
 		 @PutMapping("/users/{id}")
 		  public ResponseEntity<?> updateUsers(@PathVariable("id") long id, @RequestBody User user) {
 		    Optional<User> UserData = userRepository.findById(id);
 
 		    if (UserData.isPresent()) {
 		    	User _User = UserData.get();
-		    	_User.setUsername(user.getUsername());
+		    	_User.setEmail(user.getEmail());
+		    	//_User.setPassword((encoder.encode(user.getPassword() )) );
 		    	_User.setFirstname(user.getFirstname() ) ; 
 		    	_User.setLastname(user.getLastname());
-		    	_User.setEmail(user.getEmail());
-		
+		    	_User.setBirthday(user.getBirthday());
+		    	_User.setAdr(user.getAdr());
+		    	 
+		    	_User.setTlf(user.getTlf());
 		    	
 		      return new ResponseEntity<>(userRepository.save(_User), HttpStatus.OK);
 		    } else {

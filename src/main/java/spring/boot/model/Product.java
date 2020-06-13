@@ -1,20 +1,28 @@
 package spring.boot.model;
-import java.sql.Date;
-import java.util.Arrays;
 
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
+
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
 import javax.validation.constraints.NotNull;
 
-@Entity
+
+
+@Entity(name = "Product")
 @Table(name = "Products")
 public class Product {
 	
@@ -45,48 +53,128 @@ public class Product {
 	@Column(name = "Star")
 	private int averageStar ;
 	
-	
 
 	@Column(name = "Image")
-	private byte[] img;
-	     
+		private String Image;
+	@NotNull
+    @Column(name = "created_At")
+    private String  createdAt ;
 	
 	
-	@NotNull(message = "Product createdAt ?")
-    @Column(name = "createdAt")
-    private Date  createdAt ;
+	@NotNull
+	@Column(name = "CreatedBy")
+		private Long createdBy;
+	
+	
+	@Column(name = "publish")
+	private boolean publish ;
+	
+	
+	
 
-
-	public Product( String name,  float price,  int qt,  String cat,   Date createdAt
-			, int averageStar, byte[] img) {
+	@Column(name = "Amount")
+	private int amount;
 	
+	@Column(name = "description")
+	private String desc;
+	
+	
+	public Product( String name, float price, int qt,String cat, int averageStar, String image, String createdAt,  Long createdBy, boolean publish, int amount, String desc) {
+		
+		
+		
 		this.name = name;
 		Price = price;
 		Qt = qt;
 		this.cat = cat;
 		this.averageStar = averageStar;
-		this.img = img;
+		Image = image;
 		this.createdAt = createdAt;
+		this.createdBy = createdBy;
+		this.publish = publish;
+		this.amount = amount;
+		this.desc = desc;
 	}
 
 
-	public Product(long id,  String name,  float price,  int qt,  String cat,
-			 int averageStar, byte[] img,  Date createdAt) {
+	public boolean isPublish() {
+		return publish;
+	}
+
+
+	public void setPublish(boolean publish) {
+		this.publish = publish;
+	}
+
+
+	public Product( String name,float price, int qt,String cat, int averageStar, String image,String createdAt,  Long createdBy, int amount, String desc) {
 	
-		this.id = id;
 		this.name = name;
 		Price = price;
 		Qt = qt;
 		this.cat = cat;
 		this.averageStar = averageStar;
-		this.img = img;
+		Image = image;
 		this.createdAt = createdAt;
+		this.createdBy = createdBy;
+		this.amount = amount;
+		this.desc = desc;
+	}
+
+
+	public int getAmount() {
+		return amount;
+	}
+
+
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+
+
+	public String getDesc() {
+		return desc;
+	}
+
+
+	public void setDesc(String desc) {
+		this.desc = desc;
 	}
 
 
 	public Product() {
-
+	
 	}
+
+
+	public Product( String name,float price, int qt, String cat, int averageStar, String image,
+		 String createdAt) {
+		
+		this.name = name;
+		Price = price;
+		Qt = qt;
+		this.cat = cat;
+		this.averageStar = averageStar;
+		Image = image;
+		this.createdAt = createdAt;
+	
+	}
+
+
+	public Product( String name, float price,int qt,String cat, int averageStar, String image,String createdAt, Long createdBy) {
+	
+		this.name = name;
+		Price = price;
+		Qt = qt;
+		this.cat = cat;
+		this.averageStar = averageStar;
+		Image = image;
+		this.createdAt = createdAt;
+		this.createdBy = createdBy;
+	}
+
+
+
 
 
 	public long getId() {
@@ -149,36 +237,36 @@ public class Product {
 	}
 
 
-	public byte[] getImg() {
-		return img;
+	public String getImage() {
+		return Image;
 	}
 
 
-	public void setImg(byte[] img) {
-		this.img = img;
+	public void setImage(String image) {
+		Image = image;
 	}
 
 
-	public Date getCreatedAt() {
+	public Long getCreatedBy() {
+		return createdBy;
+	}
+
+
+	public void setCreatedBy(Long createdBy) {
+		this.createdBy = createdBy;
+	}
+
+
+	public String getCreatedAt() {
 		return createdAt;
 	}
 
 
-	public void setCreatedAt(Date createdAt) {
+	public void setCreatedAt(String createdAt) {
 		this.createdAt = createdAt;
 	}
 
 
-	@Override
-	public String toString() {
-		return "Product [id=" + id + ", name=" + name + ", Price=" + Price + ", Qt=" + Qt + ", cat=" + cat
-				+ ", averageStar=" + averageStar + ", img=" + img + ", createdAt=" + createdAt + "]";
-	}
-
-
-
-		
-		
 
 	
 
