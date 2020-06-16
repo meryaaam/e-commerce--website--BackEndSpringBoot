@@ -1,22 +1,15 @@
 package spring.boot.controllers;
 
 
-
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-//import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.zip.DataFormatException;
-import java.util.zip.Deflater;
-import java.util.zip.Inflater;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.ResponseEntity.BodyBuilder;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 //import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -32,7 +25,7 @@ bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 //import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartFile;
+
 
 
 import spring.boot.model.Product;
@@ -51,12 +44,12 @@ public class ProductController {
 	 @Autowired
 	  ProductRepository productRepository;
 	 
-	 private byte[] bytes;
+
 	 
 	 
 	
 	 @GetMapping("/products")
-	 @PreAuthorize(" hasRole('MODERATOR') or hasRole('ADMIN')")
+	 //@PreAuthorize(" hasRole('MODERATOR') or hasRole('ADMIN')")
 	  public ResponseEntity<List<Product>> getAllProducts(@RequestParam(required = false) String name) 
 	 {
 	    try {
@@ -89,7 +82,7 @@ public class ProductController {
 	        		  product.getQt() , 
 	        		  product.getCat() ,
 	        		  product.getAverageStar() ,
-	        		  product.getImage() , 
+	        	
 	        		  product.getCreatedAt() ,
 	        		  product.getCreatedBy() , 
 	        		  false ,
@@ -141,10 +134,11 @@ public class ProductController {
 	    	_Product.setQt(product.getQt());
 	    	_Product.setCat(product.getCat());
 	    	_Product.setAverageStar(product.getAverageStar());
-	    	_Product.setImage(product.getImage());
+	    	//_Product.setImage(product.getImage());
 	   
 	    	_Product.setCreatedAt(product.getCreatedAt());
 	    	
+	    	_Product.setDesc(product.getDesc());
 	    	
 	    
 	    	//_Product.setPicByte(product.getPicByte() );
@@ -157,7 +151,7 @@ public class ProductController {
 	 
 	 
 	 
-	 @PreAuthorize(" hasRole('MODERATOR') or hasRole('ADMIN')")
+	// @PreAuthorize(" hasRole('MODERATOR') or hasRole('ADMIN')")
 	 @GetMapping("/products/name")
 	  public ResponseEntity<List<Product>> findByname(String name) {
 	    try {
@@ -199,7 +193,7 @@ public class ProductController {
 	  }
 	 
 	 @GetMapping("/products/F/{id}")
-	 @PreAuthorize(" hasRole('MODERATOR') or hasRole('ADMIN')")
+	 //@PreAuthorize(" hasRole('MODERATOR') or hasRole('ADMIN')")
 	  public ResponseEntity<List<Product>> getFProduct(@PathVariable("id") long id) 
 	 {
 	    try {
@@ -220,7 +214,7 @@ public class ProductController {
 	 
 	 
 	 @GetMapping("/products/category/{cat}")
-	 @PreAuthorize(" hasRole('MODERATOR') or hasRole('ADMIN')")
+	 //@PreAuthorize(" hasRole('MODERATOR') or hasRole('ADMIN')")
 	  public ResponseEntity<List<Product>> getcategory(@PathVariable("cat") String cat) 
 	 {
 	    try {
@@ -240,7 +234,7 @@ public class ProductController {
 		}
 	 
 	 @GetMapping("/products/publish/{p}")
-	 @PreAuthorize(" hasRole('MODERATOR') or hasRole('ADMIN')")
+	 //@PreAuthorize(" hasRole('MODERATOR') or hasRole('ADMIN')")
 	  public ResponseEntity<List<Product>> getpublishproduct(@PathVariable("p") boolean p) 
 	 {
 	    try {

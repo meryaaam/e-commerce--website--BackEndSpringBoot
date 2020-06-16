@@ -54,8 +54,8 @@ public class Product {
 	private int averageStar ;
 	
 
-	@Column(name = "Image")
-		private String Image;
+	//@Column(name = "Image")
+	//	private String Image;
 	@NotNull
     @Column(name = "created_At")
     private String  createdAt ;
@@ -79,16 +79,24 @@ public class Product {
 	private String desc;
 	
 	
-	public Product( String name, float price, int qt,String cat, int averageStar, String image, String createdAt,  Long createdBy, boolean publish, int amount, String desc) {
-		
-		
+	  @OneToMany(mappedBy = "product", fetch = FetchType.LAZY,
+	            cascade = CascadeType.ALL)
+	    private Set<Image> images = new HashSet<>();
+	
+	
+	
+	
+	
+	
+	
+	public Product( String name, float price, int qt,String cat, int averageStar,  String createdAt,  Long createdBy, boolean publish, int amount, String desc) {
 		
 		this.name = name;
 		Price = price;
 		Qt = qt;
 		this.cat = cat;
 		this.averageStar = averageStar;
-		Image = image;
+	
 		this.createdAt = createdAt;
 		this.createdBy = createdBy;
 		this.publish = publish;
@@ -107,14 +115,14 @@ public class Product {
 	}
 
 
-	public Product( String name,float price, int qt,String cat, int averageStar, String image,String createdAt,  Long createdBy, int amount, String desc) {
+	public Product( String name,float price, int qt,String cat, int averageStar, String createdAt,  Long createdBy, int amount, String desc) {
 	
 		this.name = name;
 		Price = price;
 		Qt = qt;
 		this.cat = cat;
 		this.averageStar = averageStar;
-		Image = image;
+		//Image = image;
 		this.createdAt = createdAt;
 		this.createdBy = createdBy;
 		this.amount = amount;
@@ -147,28 +155,29 @@ public class Product {
 	}
 
 
-	public Product( String name,float price, int qt, String cat, int averageStar, String image,
-		 String createdAt) {
+	public Product( String name,float price, int qt, String cat, int averageStar, 
+		 String createdAt  , String desc) {
 		
 		this.name = name;
 		Price = price;
 		Qt = qt;
 		this.cat = cat;
 		this.averageStar = averageStar;
-		Image = image;
-		this.createdAt = createdAt;
+		//Image = image;
+		this.createdAt = createdAt; 
+		this.desc = desc ;
 	
 	}
 
 
-	public Product( String name, float price,int qt,String cat, int averageStar, String image,String createdAt, Long createdBy) {
+	public Product( String name, float price,int qt,String cat, int averageStar, String createdAt, Long createdBy) {
 	
 		this.name = name;
 		Price = price;
 		Qt = qt;
 		this.cat = cat;
 		this.averageStar = averageStar;
-		Image = image;
+		//Image = image;
 		this.createdAt = createdAt;
 		this.createdBy = createdBy;
 	}
@@ -237,14 +246,14 @@ public class Product {
 	}
 
 
-	public String getImage() {
-		return Image;
-	}
+	//public String getImage() {
+		//return Image;
+	//}
 
 
-	public void setImage(String image) {
-		Image = image;
-	}
+	//public void setImage(String image) {
+	//	Image = image;
+//	}
 
 
 	public Long getCreatedBy() {
