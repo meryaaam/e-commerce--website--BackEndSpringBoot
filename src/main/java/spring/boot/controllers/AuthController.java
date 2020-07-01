@@ -26,9 +26,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import spring.boot.model.ERole;
-import spring.boot.model.Role;
-import spring.boot.model.User;
+import spring.boot.entity.ERole;
+import spring.boot.entity.Role;
+import spring.boot.entity.User;
 import spring.boot.payload.request.LoginRequest;
 import spring.boot.payload.request.SignupRequest;
 import spring.boot.payload.response.JwtResponse;
@@ -81,8 +81,6 @@ public class AuthController {
 											
 												 ));
 	}
-
-
 	
 	
 	@PostMapping("/signup")

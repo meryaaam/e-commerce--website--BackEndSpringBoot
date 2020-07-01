@@ -11,7 +11,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -19,8 +19,8 @@ import org.hibernate.annotations.OnDeleteAction;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "images")
-public class Image {
+@Table(name = "imageUser")
+public class ImageUser {
 
 	@Id
 	@Column(name = "ID")
@@ -43,10 +43,10 @@ public class Image {
 	
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "product_id", nullable = false)
+    @JoinColumn(name = "User_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
-    private Product product;
+    private User user;
 	
 
 	
@@ -56,26 +56,32 @@ public class Image {
 	
 	
 	
-	public Image(String name, String type, byte[] picByte, Product product) {
+	public User getUser() {
+		return user;
+	}
+
+
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+
+
+
+	public ImageUser(String name, String type, byte[] picByte, User user) {
 		super();
 		this.name = name;
 		this.type = type;
 		this.picByte = picByte;
-		this.product = product;
+		this.user = user;
 	}
 
 
-	public Product getProduct() {
-		return product;
-	}
 
 
-	public void setProduct(Product product) {
-		this.product = product;
-	}
-
-
-	public Image() {
+	public ImageUser() {
 	
 	}
 
@@ -119,7 +125,7 @@ public class Image {
 	}
 
 
-	public Image(long id, String name, String type, byte[] picByte) {
+	public ImageUser(long id, String name, String type, byte[] picByte) {
 	
 		this.id = id;
 		this.name = name;
@@ -128,7 +134,7 @@ public class Image {
 	}
 
 
-	public Image( String name,String type, byte[] picByte) {
+	public ImageUser( String name,String type, byte[] picByte) {
 	
 		this.name = name;
 		this.type = type;

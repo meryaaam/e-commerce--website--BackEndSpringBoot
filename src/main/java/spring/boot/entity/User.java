@@ -1,4 +1,4 @@
-package spring.boot.model;
+package spring.boot.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -76,7 +78,21 @@ public class User {
 	    private Set<Role> Roles = new HashSet<>();
 
     
+		  @OneToMany(mappedBy = "user", fetch = FetchType.LAZY,
+		            cascade = CascadeType.ALL)
+		  @OnDelete(action = OnDeleteAction.CASCADE)
+		    private Set<ImageUser> imageuser = new HashSet<>();
+		  
+		  
 	public User() {
+	}
+
+	public Set<ImageUser> getImageuser() {
+		return imageuser;
+	}
+
+	public void setImageuser(Set<ImageUser> imageuser) {
+		this.imageuser = imageuser;
 	}
 
 	public User(String username, String email, String password) {

@@ -1,4 +1,4 @@
-package spring.boot.model;
+package spring.boot.entity;
 
 public enum ERole {
 	ROLE_USER,

@@ -22,8 +22,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import spring.boot.model.Product;
-import spring.boot.model.User;
+import spring.boot.entity.Product;
+import spring.boot.entity.User;
 import spring.boot.payload.response.JwtResponse;
 import spring.boot.repository.UserRepository;
 import spring.boot.security.jwt.JwtUtils;
@@ -73,7 +73,7 @@ public class UserController {
 	
 	 @PreAuthorize(" hasRole('MODERATOR') or hasRole('ADMIN') or hasRole('USER') ")
 	 @DeleteMapping("/users/{id}")
-	  public ResponseEntity<HttpStatus> deleteUsers(@PathVariable("id") long id) {
+	  public ResponseEntity<HttpStatus> deleteUserByID(@PathVariable("id") long id) {
 	    try {
 	    	userRepository.deleteById(id);
 	      return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -85,8 +85,7 @@ public class UserController {
 	 @PreAuthorize(" hasRole('MODERATOR') or hasRole('ADMIN') or hasRole('USER') ")
 	    @GetMapping("/users/{id}")
 		  public ResponseEntity<?> getUserById(@PathVariable("id") long id) {
-	    	
-	    	  List<User> User = new ArrayList<User>();
+	  
 		    Optional<User> userData = userRepository.findById(id) ;
 		  
 		 
